@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System.Threading;
 
 public class PositionController : MonoBehaviour
 {
@@ -18,10 +18,10 @@ public class PositionController : MonoBehaviour
     [SerializeField]
     private Transform[] positionPoints;
 
-    public GameObject TamagochiBody;
+    public Tamagochi tamagochi;
 
     [HideInInspector]
-    public static RoomPosition CurrentPosition { get; private set; } = RoomPosition.Programming;
+    public RoomPosition CurrentPosition { get; private set; }
     
     public void SwitchPosition(RoomPosition position)
     {
@@ -34,7 +34,7 @@ public class PositionController : MonoBehaviour
         cameras[index].Priority = 1;
         CurrentPosition = position;
 
-        TamagochiBody.transform.position = positionPoints[index].position;
+        tamagochi.CurrBody.transform.position = positionPoints[index].position;
     }
 }
 
