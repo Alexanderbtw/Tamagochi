@@ -725,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5419e27511dfd4fa0859d3ec42c6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: game_data
+  fileName: game_data.json
 --- !u!1 &93149698
 GameObject:
   m_ObjectHideFlags: 0
@@ -5202,7 +5202,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: -1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -244645513
   m_SortingOrder: 0

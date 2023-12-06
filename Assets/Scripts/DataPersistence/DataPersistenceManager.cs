@@ -74,6 +74,14 @@ public class DataPersistenceManager : MonoBehaviour
         SaveGame();
     }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            SaveGame();
+        }
+    }
+
     private List<IDataPersistence> FindAllDataPersistences()
     {
         IEnumerable<IDataPersistence> persistences = FindObjectsOfType<MonoBehaviour>()
