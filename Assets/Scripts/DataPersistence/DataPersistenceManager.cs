@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class DataPersistenceManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    public void Initialize()
     {
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistences = FindAllDataPersistences();
@@ -66,7 +67,7 @@ public class DataPersistenceManager : MonoBehaviour
     {
         NewGame();
         dataHandler.Save(gameData);
-        LoadGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnApplicationQuit()

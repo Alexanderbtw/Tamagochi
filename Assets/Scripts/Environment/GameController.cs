@@ -1,28 +1,35 @@
 using UnityEngine;
 
-public class GameController : MonoBehaviour, IDataPersistence
+public class GameController : MonoBehaviour
 {
-    private PositionController posController;
+    private PositionController positionController;
     private GameObject[] lightsSources;
-    public Tamagochi tamagochi;
+    private Tamagochi tamagochi;
 
-    public void Awake()
+    public void Initialize(GameObject[] lights, PositionController posController, Tamagochi _tamagochi)
     {
-        lightsSources = GameObject.FindGameObjectsWithTag("MainLight");
-        posController = GetComponent<PositionController>();
+        lightsSources = lights;
+        positionController = posController;
+        tamagochi = _tamagochi;
+
+        if (tamagochi.isSleeping)
+        {
+            foreach (var l in lightsSources)
+                l.SetActive(false);
+        }
     }
 
     public void Program()
     {
         if (tamagochi.IsDie) return;
 
-        if (posController.CurrentPosition == RoomPosition.Programming)
+        if (positionController.CurrentPosition == RoomPosition.Programming)
         {
             tamagochi.Program();
         }
         else
         {
-            posController.SwitchPosition(RoomPosition.Programming);
+            positionController.SwitchPosition(RoomPosition.Programming);
         }
     }
 
@@ -30,13 +37,13 @@ public class GameController : MonoBehaviour, IDataPersistence
     {
         if (tamagochi.IsDie) return;
 
-        if (posController.CurrentPosition == RoomPosition.Kitchen)
+        if (positionController.CurrentPosition == RoomPosition.Kitchen)
         {
             tamagochi.Feed();
         }
         else
         {
-            posController.SwitchPosition(RoomPosition.Kitchen);
+            positionController.SwitchPosition(RoomPosition.Kitchen);
         }
     }
 
@@ -44,13 +51,13 @@ public class GameController : MonoBehaviour, IDataPersistence
     {
         if (tamagochi.IsDie) return;
 
-        if (posController.CurrentPosition == RoomPosition.Bathroom)
+        if (positionController.CurrentPosition == RoomPosition.Bathroom)
         {
             tamagochi.Wash();
         }
         else
         {
-            posController.SwitchPosition(RoomPosition.Bathroom);
+            positionController.SwitchPosition(RoomPosition.Bathroom);
         }
     }
 
@@ -58,7 +65,7 @@ public class GameController : MonoBehaviour, IDataPersistence
     {
         if (tamagochi.IsDie) return;
 
-        if (posController.CurrentPosition == RoomPosition.Bedroom)
+        if (positionController.CurrentPosition == RoomPosition.Bedroom)
         {
             bool isSleeping = tamagochi.ToggleSleep();
 
@@ -67,18 +74,7 @@ public class GameController : MonoBehaviour, IDataPersistence
         }
         else
         {
-            posController.SwitchPosition(RoomPosition.Bedroom);
+            positionController.SwitchPosition(RoomPosition.Bedroom);
         }
     }
-
-    public void LoadData(GameData data)
-    {
-        if (data.IsSleeping)
-        {
-            foreach (var l in lightsSources)
-                l.SetActive(false);
-        }
-    }
-
-    public void SaveData(ref GameData data) { }
 }

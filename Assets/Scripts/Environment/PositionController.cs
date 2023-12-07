@@ -13,15 +13,15 @@ public class PositionController : MonoBehaviour
         { RoomPosition.Bedroom, 3 },
     };
 
-    [SerializeField]
-    private CinemachineVirtualCamera[] cameras;
-    [SerializeField]
-    private Transform[] positionPoints;
+    [SerializeField] private CinemachineVirtualCamera[] cameras;
+    [SerializeField] private Transform[] positionPoints;
+    private Tamagochi tamagochi;
+    [HideInInspector] public RoomPosition CurrentPosition { get; private set; }
 
-    public Tamagochi tamagochi;
-
-    [HideInInspector]
-    public RoomPosition CurrentPosition { get; private set; }
+    public void Initialize(Tamagochi _tamagochi)
+    {
+        tamagochi = _tamagochi;
+    }
     
     public void SwitchPosition(RoomPosition position)
     {

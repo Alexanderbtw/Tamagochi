@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using static TamagochiConstants;
@@ -6,24 +7,21 @@ using static TamagochiConstants;
 
 public class Tamagochi : MonoBehaviour, IDataPersistence
 {
-    private float timer = 60f;
+    public event Action StatsChanged;
 
-    [SerializeField]
     private GameObject[] bodies;
 
-    [HideInInspector]
-    public GameObject CurrBody;
+    [HideInInspector] public GameObject CurrBody;
 
     public float Satiety { get; private set; }
     public float Hygiene { get; private set; }
     public float Programming { get; private set; }
     public float Cheerfulness { get; private set; }
 
-    [HideInInspector]
-    public bool IsDie = false;
+    [HideInInspector] public bool isSleeping = false;
+    [HideInInspector] public bool IsDie = false;
 
     private DateTime last_levelup_time;
-    private bool isSleeping;
 
     private AgeState state;
     public AgeState State 
@@ -58,25 +56,18 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
         }
     }
 
-    private void Awake()
+    public void Initialize(GameObject[] _bodies)
     {
-        Transform[] childArray = GetComponentsInChildren<Transform>(true);
-        bodies = childArray.Skip(1).Select(c => c.gameObject).ToArray();
+        bodies = _bodies;
     }
 
-    private void Update()
+    public void Start()
     {
-        LifeCycle();
+        InvokeRepeating(nameof(LifeCycle), 0, 60f);
     }
 
     private void LifeCycle()
     {
-        if (timer > 0)
-        {
-            timer -= Time.deltaTime;
-            return;
-        }
-
         Satiety -= SATIETY_DIMINISH_PER_MINUTE;
         Hygiene -= HYGIENE_DIMINISH_PER_MINUTE;
         Programming -= PROGRAMMING_DIMINISH_PER_MINUTE;
@@ -96,7 +87,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
             IsDie = true;
         }
 
-        timer = 60f;
+        StatsChanged?.Invoke();
     }
 
     public void Feed()
@@ -105,6 +96,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
         {
             Satiety += SATIETY_ADD;
             Satiety = Satiety > 100 ? 100 : Satiety;
+            StatsChanged?.Invoke();
         }
     }
 
@@ -114,6 +106,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
         {
             Programming += PROGRAMMING_ADD;
             Programming = Programming > 100 ? 100 : Programming;
+            StatsChanged?.Invoke();
         }
     }
 
@@ -123,6 +116,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
         {
             Hygiene += HYGIENE_ADD;
             Hygiene = Hygiene > 100 ? 100 : Hygiene;
+            StatsChanged?.Invoke();
         }
     }
 
@@ -135,21 +129,23 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        float minutes_away = (float)(DateTime.UtcNow - DateTime.FromFileTimeUtc(data.QuitTime)).TotalMinutes;
+        int minutes_away = (int)(DateTime.UtcNow - DateTime.FromFileTimeUtc(data.QuitTime)).TotalMinutes;
 
         this.Programming = data.Programming - minutes_away * PROGRAMMING_DIMINISH_PER_MINUTE;
         this.Satiety = data.Satiety - minutes_away * SATIETY_DIMINISH_PER_MINUTE;
         this.Hygiene = data.Hygiene - minutes_away * HYGIENE_DIMINISH_PER_MINUTE;
         this.last_levelup_time = DateTime.FromFileTimeUtc(data.LastLevelUpTime);
-        this.state = data.State;
+
+        CurrBody = this.bodies[Convert.ToInt32(data.State)];
 
         this.isSleeping = data.IsSleeping;
-        this.level = data.Level + (int)(DateTime.UtcNow - last_levelup_time).TotalDays;
+        this.Level = data.Level + (int)(DateTime.UtcNow - last_levelup_time).TotalDays;
 
-        CurrBody = bodies[Convert.ToInt32(state)];
         if (isSleeping)
         {
             this.Cheerfulness = data.Cheerfulness + minutes_away * CHEERFULNESS_ADD_PER_MINUTE;
+            this.Cheerfulness = this.Cheerfulness > 100 ? 100 : this.Cheerfulness;
+
             CurrBody.GetComponent<MeshRenderer>().enabled = false;
         }
         else
@@ -176,7 +172,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
         data.Hygiene = this.Hygiene;
         data.Satiety = this.Satiety;
         data.LastLevelUpTime = this.last_levelup_time.ToFileTimeUtc();
-        data.State = this.state;
         data.IsSleeping = this.isSleeping;
+        data.State = this.State;
     }
 }

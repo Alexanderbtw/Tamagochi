@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static TamagochiConstants;
 
 public class TamagochiGUI : MonoBehaviour
 {
@@ -14,12 +13,13 @@ public class TamagochiGUI : MonoBehaviour
 
     private Tamagochi tamagochi;
 
-    private void Start()
+    public void Initialize(Tamagochi _tamagochi)
     {
-        tamagochi = GetComponent<Tamagochi>();
+        tamagochi = _tamagochi;
+        tamagochi.StatsChanged += StatsDisplay;
     }
 
-    void Update()
+    private void StatsDisplay()
     {
         CheerfulnessSlider.value = (int)tamagochi.Cheerfulness;
         SatietySlider.value = (int)tamagochi.Satiety;

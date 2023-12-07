@@ -15,7 +15,4 @@ public class GameData
     public float Hygiene = 100f;
     public AgeState State = AgeState.Child;
     public bool IsSleeping = false;
-
-    // PositionController
-    public RoomPosition CurrentPosition = RoomPosition.Programming;
 }
