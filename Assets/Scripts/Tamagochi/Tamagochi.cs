@@ -9,7 +9,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
 {
     public event Action StatsChanged;
 
-    private GameObject[] bodies;
+    [SerializeField] private GameObject[] bodies;
 
     [HideInInspector] public GameObject CurrBody;
 
@@ -24,7 +24,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
     private DateTime last_levelup_time;
 
     private AgeState state;
-    public AgeState State 
+    public AgeState State
     {
         get => state;
         private set
@@ -40,6 +40,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
         }
     }
     private int level;
+
     public int Level
     {
         get => level;
@@ -64,6 +65,16 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
     public void Start()
     {
         InvokeRepeating(nameof(LifeCycle), 0, 60f);
+    }
+
+    public void LEVELTESTUP() {
+        Level += 1;
+        StatsChanged?.Invoke();
+    }
+
+    public void LEVELTESTDOWN() {
+        Level -= 1;
+        StatsChanged?.Invoke();
     }
 
     private void LifeCycle()

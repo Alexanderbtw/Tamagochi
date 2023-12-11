@@ -14,7 +14,7 @@ public class Bootstrap : MonoBehaviour
     {
         tamagochiGUI.Initialize(tamagochi);
 
-        var bodies = tamagochi.GetComponentsInChildren<Transform>(true).Skip(1).Select(c => c.gameObject).ToArray();
+        var bodies = tamagochi.GetComponentsInChildren<TamagochiFeed>(true).Select(c => c.gameObject).ToArray();
         tamagochi.Initialize(bodies);
 
         dataPersistenceManager.Initialize();
