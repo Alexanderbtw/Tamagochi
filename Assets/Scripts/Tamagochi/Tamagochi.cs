@@ -35,7 +35,10 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
             }
             bodies[Convert.ToInt32(value)].transform.position = CurrBody.transform.position;
             CurrBody = bodies[Convert.ToInt32(value)];
-            CurrBody.SetActive(true);
+            if (!isSleeping)
+            {
+                CurrBody.SetActive(true);
+            }
             state = value;
         }
     }
@@ -134,7 +137,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
     public bool ToggleSleep()
     {
         isSleeping = !isSleeping;
-        CurrBody.GetComponent<MeshRenderer>().enabled = !isSleeping;
+        CurrBody.SetActive(!isSleeping);
         return isSleeping;
     }
 
@@ -157,7 +160,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
             this.Cheerfulness = data.Cheerfulness + minutes_away * CHEERFULNESS_ADD_PER_MINUTE;
             this.Cheerfulness = this.Cheerfulness > 100 ? 100 : this.Cheerfulness;
 
-            CurrBody.GetComponent<MeshRenderer>().enabled = false;
+            CurrBody.SetActive(false);
         }
         else
         {

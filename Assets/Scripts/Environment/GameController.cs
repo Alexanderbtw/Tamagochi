@@ -37,11 +37,7 @@ public class GameController : MonoBehaviour
     {
         if (tamagochi.IsDie) return;
 
-        if (positionController.CurrentPosition == RoomPosition.Kitchen)
-        {
-            tamagochi.Feed();
-        }
-        else
+        if (positionController.CurrentPosition != RoomPosition.Kitchen)
         {
             positionController.SwitchPosition(RoomPosition.Kitchen);
         }
