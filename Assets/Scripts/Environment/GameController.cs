@@ -49,6 +49,7 @@ public class GameController : MonoBehaviour
 
         if (positionController.CurrentPosition == RoomPosition.Bathroom)
         {
+            positionController.SwitchPosition(RoomPosition.Shower);
             tamagochi.Wash();
         }
         else

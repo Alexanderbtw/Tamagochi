@@ -11,6 +11,8 @@ public class PositionController : MonoBehaviour
         { RoomPosition.Kitchen, 1 },
         { RoomPosition.Bathroom, 2 },
         { RoomPosition.Bedroom, 3 },
+        { RoomPosition.Shower, 4 },
+        { RoomPosition.Bed, 5 }
     };
 
     [SerializeField] private CinemachineVirtualCamera[] cameras;
@@ -43,5 +45,7 @@ public enum RoomPosition
     Programming,
     Kitchen,
     Bathroom,
-    Bedroom
+    Bedroom,
+    Shower,
+    Bed
 }
