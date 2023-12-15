@@ -1,9 +1,10 @@
     using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class ThrowableObject : MonoBehaviour
 {
-    [Range(0f, 1f)] public float MinSwipeDist = 0f;
+    [Range(1.5f, 2f)] public float MinSwipeDist = 0f;
     public float ResetTime = 4f;
 
     [Header("Throw Force")]
@@ -26,7 +27,7 @@ public class ThrowableObject : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         resetPos = transform.position;
         resetRot = transform.rotation;
-        ResetObject();
+        //ResetObject();
     }
 
     private void OnMouseDown()
@@ -57,7 +58,7 @@ public class ThrowableObject : MonoBehaviour
         var swipeTime = endTime - startTime;
         var swipeDistance = Camera.main.ScreenToViewportPoint(endPos - startPos).magnitude;
 
-        if (swipeTime < 1f && swipeDistance > MinSwipeDist)
+        if (swipeTime < 1f && swipeTime > 0.1f && swipeDistance > MinSwipeDist)
         {
             var force = Camera.main.ScreenToViewportPoint(endPos - startPos) / swipeTime;
             rb.AddForce(new Vector3(force.x * ForceMultiplierSide, force.y * ForceMultiplierUp, force.magnitude * ForceMultiplierForward));
