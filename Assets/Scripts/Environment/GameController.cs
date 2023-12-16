@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour
     private PositionController positionController;
     private GameObject[] lightsSources;
     private Tamagochi tamagochi;
+    public static bool AllDisabled;
 
     public void Initialize(GameObject[] lights, PositionController posController, Tamagochi _tamagochi)
     {
@@ -12,7 +13,7 @@ public class GameController : MonoBehaviour
         positionController = posController;
         tamagochi = _tamagochi;
 
-        if (tamagochi.isSleeping)
+        if (tamagochi.IsSleeping)
         {
             foreach (var l in lightsSources)
                 l.SetActive(false);
@@ -21,11 +22,11 @@ public class GameController : MonoBehaviour
 
     public void Program()
     {
-        if (tamagochi.IsDie) return;
+        if (tamagochi.IsDie || AllDisabled) return;
 
         if (positionController.CurrentPosition == RoomPosition.Programming)
         {
-            tamagochi.Program();
+            StartCoroutine(tamagochi.Program());
         }
         else
         {
@@ -35,7 +36,7 @@ public class GameController : MonoBehaviour
 
     public void Feed()
     {
-        if (tamagochi.IsDie) return;
+        if (tamagochi.IsDie || AllDisabled) return;
 
         if (positionController.CurrentPosition != RoomPosition.Kitchen)
         {
@@ -45,12 +46,11 @@ public class GameController : MonoBehaviour
 
     public void Wash()
     {
-        if (tamagochi.IsDie) return;
+        if (tamagochi.IsDie || AllDisabled) return;
 
         if (positionController.CurrentPosition == RoomPosition.Bathroom)
         {
             positionController.SwitchPosition(RoomPosition.Shower);
-            tamagochi.Wash();
         }
         else
         {
@@ -60,14 +60,14 @@ public class GameController : MonoBehaviour
 
     public void Sleep()
     {
-        if (tamagochi.IsDie) return;
+        if (tamagochi.IsDie || AllDisabled) return;
 
         if (positionController.CurrentPosition == RoomPosition.Bedroom)
         {
-            bool isSleeping = tamagochi.ToggleSleep();
+            tamagochi.ToggleSleep();
 
             foreach (var l in lightsSources)
-                l.SetActive(!isSleeping);
+                l.SetActive(!tamagochi.IsSleeping);
         }
         else
         {

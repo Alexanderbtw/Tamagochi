@@ -8,7 +8,7 @@ public static class TamagochiConstants
     public static readonly float CHEERFULNESS_DIMINISH_PER_MINUTE = 0.1f;
 
     public static readonly float PROGRAMMING_ADD = 10f;
-    public static readonly float HYGIENE_ADD = 10f;
+    public static readonly float HYGIENE_ADD = 1f;
     public static readonly float SATIETY_ADD = 10f;
     public static readonly float CHEERFULNESS_ADD_PER_MINUTE = 0.2f;
 

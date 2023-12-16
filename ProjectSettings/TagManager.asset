@@ -8,6 +8,7 @@ TagManager:
   - TamagochiPosition
   - Drag
   - Food
+  - Shower
   layers:
   - Default
   - TransparentFX
