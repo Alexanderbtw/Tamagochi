@@ -9,7 +9,7 @@ public class TamagochiGUI : MonoBehaviour
     public Slider ProgrammingSlider;
     public Slider CheerfulnessSlider;
     public TextMeshProUGUI LevelText;
-    public GameObject DiePanel;
+    public GameObject RestartButton;
 
     private Tamagochi tamagochi;
 
@@ -25,8 +25,14 @@ public class TamagochiGUI : MonoBehaviour
         SatietySlider.value = (int)tamagochi.Satiety;
         HygieneSlider.value = (int)tamagochi.Hygiene;
         ProgrammingSlider.value = (int)tamagochi.Programming;
+
         LevelText.text = $"Level: {tamagochi.Level}";
 
-        DiePanel.SetActive(tamagochi.IsDie);
+        if (tamagochi.IsDie)
+        {
+            LevelText.color = Color.red;
+            LevelText.text = $"Wasted";
+            RestartButton.SetActive(true);
+        }
     }
 }

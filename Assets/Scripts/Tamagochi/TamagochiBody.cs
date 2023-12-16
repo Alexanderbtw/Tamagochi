@@ -66,9 +66,15 @@ public class TamagochiBody : MonoBehaviour
         var ps = environment.GetComponent<ParticleSystem>();
 
         if (currWashing)
+        {
             ps.Play();
+            AudioController.Instance.PlaySFX("Shower", true);
+        }
         else
+        {
             ps.Stop();
+            AudioController.Instance.StopSFX();
+        }
 
         animator.SetBool("IsWashing", currWashing);
     }

@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
 
         if (positionController.CurrentPosition == RoomPosition.Bedroom)
         {
+            AudioController.Instance.PlaySFX("LightSwitch");
             tamagochi.ToggleSleep();
 
             foreach (var l in lightsSources)

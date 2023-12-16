@@ -112,6 +112,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
     {
         if (!IsSleeping)
         {
+            AudioController.Instance.PlaySFX("Eat");
             Satiety += SATIETY_ADD;
             Satiety = Satiety > 100 ? 100 : Satiety;
 
@@ -125,6 +126,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
         {
             GameController.AllDisabled = true;
             CurrBody.GetComponent<TamagochiBody>().ProgramBehavior();
+            AudioController.Instance.PlaySFX("Program");
 
             yield return new WaitForSeconds(3f);
 
