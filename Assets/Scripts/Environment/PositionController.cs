@@ -2,19 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using System.Threading;
+using System;
 
 public class PositionController : MonoBehaviour
 {
-    private static Dictionary<RoomPosition, int> position_to_index = new()
-    {
-        { RoomPosition.Programming, 0 },
-        { RoomPosition.Kitchen, 1 },
-        { RoomPosition.Bathroom, 2 },
-        { RoomPosition.Bedroom, 3 },
-        { RoomPosition.Shower, 4 },
-        { RoomPosition.Bed, 5 }
-    };
-
     [SerializeField] private CinemachineVirtualCamera[] cameras;
     [SerializeField] private Transform[] positionPoints;
     private Tamagochi tamagochi;
@@ -29,14 +20,14 @@ public class PositionController : MonoBehaviour
     {
         if (CurrentPosition == position) return;
 
-        int index = position_to_index[position];
-        int cur_index = position_to_index[CurrentPosition];
+        int index = Convert.ToInt32(position);
+        int cur_index = Convert.ToInt32(CurrentPosition);
 
         cameras[cur_index].Priority = 0;
         cameras[index].Priority = 1;
         CurrentPosition = position;
 
-        tamagochi.CurrBody.transform.position = positionPoints[index].position;
+        tamagochi.CurrBody.transform.SetPositionAndRotation(positionPoints[index].position, positionPoints[index].rotation); 
     }
 }
 

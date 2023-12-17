@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b9868103a7e098a4c9d3edd68a44200a
+guid: b4ab7b0c818d00a4886373430fe9bd66
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,85 +149,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icon_prog
+      name: Buttons_Restart
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 200
-        height: 200
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef54a89b5f14c254488a7db78fe0f80e
-      internalID: -958471633
+      spriteID: e46e281fd85a8584b8d0c38e596847c6
+      internalID: -143745487
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_feed
+      name: Buttons_Program
       rect:
         serializedVersion: 2
-        x: 200
+        x: 300
         y: 0
-        width: 200
-        height: 200
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5899b3cd7a97484da13af4758d570ca
-      internalID: 2025458618
+      spriteID: 377eef8cbfd300942b3c5782e365498b
+      internalID: -1988604792
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icon_wash
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 0
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 807e224e21d02b54882c0351536f955f
-      internalID: -1778987193
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: icon_sleep
+      name: Buttons_Eat
       rect:
         serializedVersion: 2
         x: 600
         y: 0
-        width: 200
-        height: 200
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cd4bf6668ed2254a87d9b49f6f3d0e1
-      internalID: -318142673
+      spriteID: a45657c28798a414294658d385b96d31
+      internalID: 1648452152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons_Wash
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e720cb8bcbad2ee42b5af32a32d7617b
+      internalID: -287073021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons_Sleep
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b1306c09ec13f48b55d46915fb512a
+      internalID: 847048590
       vertices: []
       indices: 
       edges: []
@@ -235,7 +256,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 81c869f056676e8478063d22c7e26669
+    spriteID: 228e73391423c4a4d8df60af8cb02a1d
     internalID: 0
     vertices: []
     indices: 
@@ -243,10 +264,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      icon_feed: 2025458618
-      icon_prog: -958471633
-      icon_sleep: -318142673
-      icon_wash: -1778987193
+      Buttons_Eat: 1648452152
+      Buttons_Program: -1988604792
+      Buttons_Restart: -143745487
+      Buttons_Sleep: 847048590
+      Buttons_Wash: -287073021
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

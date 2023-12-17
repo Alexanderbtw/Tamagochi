@@ -35,7 +35,7 @@ public class Tamagochi : MonoBehaviour, IDataPersistence
             {
                 body.SetActive(false);
             }
-            bodies[Convert.ToInt32(value)].transform.position = CurrBody.transform.position;
+            bodies[Convert.ToInt32(value)].transform.SetPositionAndRotation(CurrBody.transform.position, CurrBody.transform.rotation);
             CurrBody = bodies[Convert.ToInt32(value)];
             if (!IsSleeping)
             {
